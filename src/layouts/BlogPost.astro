@@ -19,8 +19,8 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	<body class="font-mono">
 		<Header />
 		<main class="w-11/12 md:w-3/5 mx-auto mt-2">
-			<article>
-				<h1 class="title">{title}</h1>
+			<article class="prose">
+				<h2 class="title">{title}</h2>
 				<FormattedDate date={pubDate} />
 				{
 					updatedDate && (
