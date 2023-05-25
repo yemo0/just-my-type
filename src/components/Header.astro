@@ -1,11 +1,11 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE, WEB_SITE_URL } from '../consts';
+import { SITE_TITLE } from '../consts';
 ---
 
 <header class="flex w-11/12 md:w-3/5 h-16 mx-auto items-center justify-between">
 	<div class="text-2xl font-bold">
-		<a href={WEB_SITE_URL}>{SITE_TITLE}</a>
+		<a href="/">{SITE_TITLE}</a>
 	</div>
 	<nav class="hidden md:block">
 		<HeaderLink href="/">Home</HeaderLink>
