@@ -4,6 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import SuspensionPanel from '../components/SuspensionPanel.astro';
 
 // type Props = CollectionEntry<'blog'>['data'];
 
@@ -20,6 +21,7 @@ const { title, description, pubDate, updatedDate, heroImage, postBodyWords } = A
 	<body class="dark:bg-black dark:text-slate-200">
 		<Header />
 		<main class="font-mono w-11/12 md:w-3/5 mx-auto mt-10 ">
+			<SuspensionPanel />
 			<article class=" prose md:max-w-[90ch] mx-auto dark:prose-invert prose-headings:mt-0 prose-p:mt-0 break-words  dark:prose-code:text-zinc-800 dark:prose-headings:text-slate-200">
 				<h1 class="m-0">{title}</h1>
 				<div class="mb-5">
@@ -39,3 +41,38 @@ const { title, description, pubDate, updatedDate, heroImage, postBodyWords } = A
 		<Footer />
 	</body>
 </html>
+
+<script>
+	// suspension-panel
+	let suspensionPanel = document.querySelector(".suspension-panel")
+	// suspension-panel show
+	let suspensionPanelShow = false
+
+	window.onscroll = () => {
+		let scrollTop = document.documentElement.scrollTop
+
+		// Show suspension-panel
+		if (scrollTop >= 900) {
+			if (!suspensionPanelShow) {
+				suspensionPanelShow = true
+				suspensionPanel!.classList.remove("hidden")
+			}
+			return
+		}
+		// Hide suspension-panel
+		if (suspensionPanelShow) {
+			suspensionPanelShow = false
+			suspensionPanel!.classList.add("hidden")
+		}		
+	}
+
+	// Scroll Go To Top
+	let goToTop = document.querySelector(".go-to-top")
+	console.log(goToTop);
+	goToTop!.addEventListener("click", () => {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth"
+		})
+	})
+</script>
