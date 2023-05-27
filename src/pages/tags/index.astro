@@ -1,0 +1,55 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection } from "astro:content";
+import { map } from "astro/zod";
+
+const posts = await getCollection("blog");
+let tagsName: Array<string> = [];
+let tags = new Map<string, number>();
+
+// get tags name and tags amount
+posts.forEach((post) => {
+  if (post.data.tags != undefined) {
+    post.data.tags.forEach((item) => {
+      if (tags.has(item)) {
+        tags.set(item, tags.get(item)! + 1);
+        return;
+      }
+      tags.set(item, 1);
+      tagsName.push(item);
+    });
+  }
+});
+---
+
+<!DOCTYPE html>
+<html lang="en" class="color-scheme">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body class="dark:bg-zinc-800 dark:text-slate-200">
+    <Header title={SITE_TITLE} />
+    <main class="w-11/12 md:w-3/5 mx-auto mt-2 md:max-w-[90ch]">
+      <h1 class="font-bold text-4xl mb-6 mt-6 md:mt-20 dark:text-slate-200">Tags</h1>
+      <div class="flex">
+        {
+          tagsName.map((k, v) => (
+            <a
+              href={Astro.url + "/"+ k}
+              class=" bg-zinc-300 p-3 mr-2 rounded-md cursor-pointer font-bold dark:text-slate-200 dark:bg-zinc-700"
+            >
+              {k}
+              <sup>
+                <strong class="dark:text-slate-200">{tags.get(k)}</strong>
+              </sup>
+            </a>
+          ))
+        }
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
