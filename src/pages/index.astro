@@ -14,8 +14,6 @@ let posts = (await getCollection('blog')).sort(
 if (posts.length > 4) {
 	posts = posts.slice(0, 5)
 }
-
-
 ---
 
 <!DOCTYPE html>
@@ -25,7 +23,7 @@ if (posts.length > 4) {
 	</head>
 	<body class="dark:bg-zinc-800 dark:text-slate-200">
 		<Header title={SITE_TITLE} />
-		<main class="w-11/12 md:w-3/5 mx-auto mt-2">
+		<main class="w-11/12 md:w-3/5 mx-auto mt-2 mb-8">
 			<MainPosts posts={posts}></MainPosts>
 		</main>
 		<nav class="flex w-11/12 md:w-3/5 mx-auto justify-between">
