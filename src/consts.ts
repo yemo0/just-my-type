@@ -4,5 +4,6 @@
 export const SITE_TITLE = 'HOME';
 export const SITE_DESCRIPTION = 'Welcome to my website!';
 export const WEB_SITE_URL = "http://localhost:3000/";
-// 
-export const PAGE_SIZE = 6;
+
+// Paginate
+export const PAGE_SIZE = 5;

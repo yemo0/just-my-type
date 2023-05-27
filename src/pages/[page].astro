@@ -20,7 +20,9 @@ const { page } = Astro.props;
 	</head>
 	<body>
 		<Header title={SITE_TITLE} />
-		<MainPosts posts={page.data} />
+		<main class="w-11/12 md:w-3/5 mx-auto mt-2">
+			<MainPosts posts={page.data} />
+		</main>
 		<Paginate pageURL={page.url}/>
 		<Footer/>
 	</body>

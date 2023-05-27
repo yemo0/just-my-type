@@ -1,5 +1,9 @@
 ---
 const {pageURL} = Astro.props
+// if current on page 2 then modify prev to home
+if (pageURL.current === '/2') {
+    pageURL.prev = '/'
+}
 ---
 
 <nav class="flex w-11/12 md:w-3/5 mx-auto justify-between">
