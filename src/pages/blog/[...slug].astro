@@ -13,9 +13,11 @@ type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
 const { Content } = await post.render();
+const postBodyWords = post.body.length;
+
 ---
 
-<BlogPost {...post.data}>
-	<h1>{post.data.title}</h1>
+<BlogPost postBodyWords={postBodyWords} {...post.data}>
 	<Content />
 </BlogPost>
+

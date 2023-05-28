@@ -1,3 +1,7 @@
+# content
+*.md
+*.mdx
+
 # build output
 dist/
 # generated types
