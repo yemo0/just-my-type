@@ -9,7 +9,7 @@ import Tags from '../components/Tags.astro';
 
 // type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, postBodyWords, tags } = Astro.props;
+const { title, description, date, updatedDate, heroImage, postBodyWords, tags } = Astro.props;
 
 ---
 
@@ -26,7 +26,7 @@ const { title, description, pubDate, updatedDate, heroImage, postBodyWords, tags
 			<article class=" prose md:max-w-[90ch] mx-auto dark:prose-invert prose-headings:mt-0 prose-p:mt-0 break-words  dark:prose-code:text-zinc-800 dark:prose-headings:text-slate-200">
 				<h1 class="m-0">{title}</h1>
 				<div class="mb-5">
-					<FormattedDate date={pubDate} />·&nbsp;{Math.ceil(postBodyWords / 275)}&nbsp;mins&nbsp;read
+					<FormattedDate date={date} />·&nbsp;{Math.ceil(postBodyWords / 275)}&nbsp;mins&nbsp;read
 				</div>
 				<!-- {
 					updatedDate && (

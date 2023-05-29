@@ -9,7 +9,7 @@ import MainPosts from '../components/MainPosts.astro';
 import Paginate from '../components/Paginate.astro';
 
 let posts = (await getCollection('blog')).sort(
-	(b, a) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+	(b, a) => a.data.date.valueOf() - b.data.date.valueOf()
 );
 if (posts.length > 4) {
 	posts = posts.slice(0, 5)
