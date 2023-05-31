@@ -17,28 +17,20 @@ const { title, description, date, updatedDate, heroImage, postBodyWords, tags } 
 	<head>
 		<BaseHead title={title} description={description} />
 	</head>
-	
 
 	<body class="dark:bg-zinc-800 dark:text-slate-200">
 		<Header />
 		<main class="font-mono w-11/12 md:w-3/5 mx-auto mt-10 ">
 			<SuspensionPanel />
-			<article class=" prose md:max-w-[90ch] mx-auto dark:prose-invert prose-headings:mt-0 prose-p:mt-0 break-words  dark:prose-code:text-zinc-800 dark:prose-headings:text-slate-200">
+			<article class=" prose md:max-w-[90ch] mx-auto dark:prose-invert prose-headings:mt-0 prose-p:mt-0 break-words 
+			 dark:prose-code:text-zinc-800 dark:prose-headings:text-slate-200 prose-lead:w-full prose-lead:aspect-square">
 				<h1 class="m-0">{title}</h1>
 				<div class="mb-5">
 					<FormattedDate date={date} />·&nbsp;{Math.ceil(postBodyWords / 275)}&nbsp;mins&nbsp;read
 				</div>
-				<!-- {
-					updatedDate && (
-						<div class="last-updated-on">
-							Last updated on <FormattedDate date={updatedDate} />
-						</div>
-					)
-				} -->
 				<slot />
 				<Tags tags={tags} />
 			</article>
-			<!-- <article class="max-lg:hidden w-full border-2">1</article> -->
 		</main>
 		
 		<Footer />
@@ -71,11 +63,16 @@ const { title, description, date, updatedDate, heroImage, postBodyWords, tags } 
 
 	// Scroll Go To Top
 	let goToTop = document.querySelector(".go-to-top")
-	console.log(goToTop);
 	goToTop!.addEventListener("click", () => {
 		window.scrollTo({
 			top: 0,
 			behavior: "smooth"
 		})
+	})
+
+	// Add css to each iframe
+	document.querySelectorAll("iframe").forEach((item) => {
+		console.log(item);
+		item.classList.add("lead")
 	})
 </script>
