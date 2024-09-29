@@ -6,34 +6,32 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import Footer from "../../components/Footer.astro";
 import MainPosts from "../../components/MainPosts.astro";
 
-// Uses tag as dynamic params 
+// Uses tag as dynamic params
 export async function getStaticPaths() {
-	let tagsName: Array<string> = [];
-    const posts = await getCollection('blog');
-	posts.forEach((item) => {
-		if (item.data.tags != undefined) {
-			tagsName.push(...item.data.tags)
-		}
-	})
+  let tagsName: Array<string> = [];
+  const posts = await getCollection("blog");
+  posts.forEach((item) => {
+    if (item.data.tags != undefined) {
+      tagsName.push(...item.data.tags);
+    }
+  });
 
-	return tagsName.map((tagName) => {
-		return {params: { tag: tagName}}
-	})
-	
+  return tagsName.map((tagName) => {
+    return { params: { tag: tagName } };
+  });
 }
 
-// Get tag name
-let pathName = Astro.url.pathname.split("/")
-let tagName = pathName[pathName.length - 1]
-tagName = decodeURIComponent(tagName)
+// // Get tag name
+let pathName = Astro.url.pathname.split("/");
+let tagName = pathName[pathName.length - 1];
+tagName = decodeURIComponent(tagName);
+console.log(tagName);
 
 //  Get the content containing the Tag
 const posts = await getCollection("blog", ({ data }) => {
-	return data.tags?.includes(tagName) === true
-	
+  return data.tags?.includes(tagName) === true;
 });
 ---
-
 
 <!DOCTYPE html>
 <html lang="en" class="color-scheme">
@@ -47,8 +45,13 @@ const posts = await getCollection("blog", ({ data }) => {
         <a href="/">Home</a>&nbsp;»&nbsp;
         <a href={"/" + "tags"}>Tags</a>
       </div>
-      <h1 class="font-bold text-4xl  dark:text-slate-200 mb-4">{tagName}</h1>
-      <MainPosts posts={posts} />
+      <h1 class="font-bold text-4xl dark:text-slate-200 mb-4">{tagName}</h1>
+      <!-- <MainPosts posts={posts} /> -->
+      {
+        posts.map((post) => (
+          <div class="text-xl font-bold pb-2">{post.data.title}</div>
+        ))
+      }
     </main>
     <Footer />
   </body>

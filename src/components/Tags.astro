@@ -1,13 +1,15 @@
 ---
-const { tags } = Astro.props
-
+const { tags } = Astro.props;
 ---
 
-<ul class="list-none flex p-0 ">
-    {tags !== undefined ? 
-        tags.map((tag) => (
-            <a href={"/tags/" + tag} class="no-underline"><li class="px-4 py-1 mr-2 bg-slate-100 rounded-md">{tag}</li></a>
+<ul class="list-none flex p-0">
+  {
+    tags !== undefined
+      ? tags.map((tag) => (
+          <a href={"/tags/" + tag} class="no-underline">
+            <li class="px-4 py-1 mr-2 bg-slate-100 rounded-md">{tag}</li>
+          </a>
         ))
-  
-     : null}
+      : null
+  }
 </ul>

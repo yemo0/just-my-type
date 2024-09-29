@@ -1,29 +1,29 @@
 ---
 import { getCollection } from "astro:content";
 import Footer from "../components/Footer.astro";
-import Header from '../components/Header.astro';
+import Header from "../components/Header.astro";
 import BaseHead from "../components/BaseHead.astro";
 import MainPosts from "../components/MainPosts.astro";
-import { SITE_TITLE, SITE_DESCRIPTION, PAGE_SIZE } from '../consts';
+import { SITE_TITLE, SITE_DESCRIPTION, PAGE_SIZE } from "../consts";
 import Paginate from "../components/Paginate.astro";
 export async function getStaticPaths({ paginate }) {
-    const allPosts = await getCollection('blog')
-    return paginate(allPosts, { pageSize: PAGE_SIZE})
+  const allPosts = await getCollection("blog");
+  return paginate(allPosts, { pageSize: PAGE_SIZE });
 }
 const { page } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en" class="color-scheme">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main class="w-11/12 md:w-3/5 mx-auto mt-2 mb-8">
-			<MainPosts posts={page.data} />
-		</main>
-		<Paginate pageURL={page.url}/>
-		<Footer/>
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header title={SITE_TITLE} />
+    <main class="w-11/12 md:w-3/5 mx-auto mt-2 mb-8">
+      <MainPosts posts={page.data} />
+    </main>
+    <Paginate pageURL={page.url} />
+    <Footer />
+  </body>
 </html>
