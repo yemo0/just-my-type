@@ -10,7 +10,11 @@ export async function getStaticPaths({ paginate }) {
   const allPosts = await getCollection("blog");
   return paginate(allPosts, { pageSize: PAGE_SIZE });
 }
-const { page } = Astro.props;
+const { page }: { page: Page } = Astro.props;
+interface Page {
+  data: any; // Specify the type of data property here
+  url: string;
+}
 ---
 
 <MainLayout>
