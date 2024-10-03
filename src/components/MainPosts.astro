@@ -1,20 +1,28 @@
 ---
 import FormattedDate from "./FormattedDate.astro";
-const {posts} = Astro.props;
+const { posts } = Astro.props;
 ---
 
 <section>
-    <ul>
-        {posts.map((post) => (
-            <a href={`/blog/${post.slug}/`}>
-                <div class="flex flex-col border rounded-md border-zinc-200 mb-4 p-5 hover:cursor-pointer hover:shadow-md dark:border-zinc-700 dark:bg-zinc-700">
-                    <div class="text-xl font-bold pb-2">{post.data.title}</div>
-                    <div class="pb-2 text-sm text-gray-600">{post.data.description}</div>
-                    <div class="text-sm text-gray-600">
-                        <FormattedDate date={post.data.date} />·&nbsp;{Math.ceil(post.body.length / 275)}&nbsp;mins&nbsp;read
-                    </div>
-                </div>
-            </a>
-        ))}
-    </ul>
+  <ul>
+    {
+      posts.map((post) => (
+        <a href={`/blog/${post.slug}/`}>
+          <div
+            class="flex flex-col border rounded-md border-neutral-600 mb-4 p-5 hover:cursor-pointer hover:shadow-md dark:border-neutral-800
+           dark:bg-neutral-900 dark:shadow-none dark:hover:border-neutral-600"
+          >
+            <div class="text-xl font-bold pb-2">{post.data.title}</div>
+            <div class="pb-2 text-sm text-neutral-800 dark:text-neutral-600">
+              {post.data.description}
+            </div>
+            <div class="text-sm text-neutral-800 dark:text-neutral-600">
+              <FormattedDate date={post.data.date} />
+              ·&nbsp;{Math.ceil(post.body.length / 275)}&nbsp;mins&nbsp;read
+            </div>
+          </div>
+        </a>
+      ))
+    }
+  </ul>
 </section>

@@ -1,35 +1,41 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
-import MainPosts from '../components/MainPosts.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION, PAGE_SIZE } from "../consts";
+import { getCollection } from "astro:content";
+import MainPosts from "../components/MainPosts.astro";
+import MainLayout from "../layouts/mainLayout.astro";
 
-let posts = (await getCollection('blog')).sort(
-	(b, a) => a.data.date.valueOf() - b.data.date.valueOf()
+let posts = (await getCollection("blog")).sort(
+  (b, a) => a.data.date.valueOf() - b.data.date.valueOf()
 );
-const allPostLength = posts.length
-if (posts.length >= 5) {
-	posts = posts.slice(0, 5)
+const allPostLength = posts.length;
+if (posts.length >= PAGE_SIZE) {
+  posts = posts.slice(0, PAGE_SIZE);
 }
-
 ---
 
-<!DOCTYPE html>
-<html lang="en" class="color-scheme">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body class="dark:bg-zinc-800 dark:text-slate-200">
-		<Header title={SITE_TITLE} />
-		<main class="w-11/12 md:w-3/5 mx-auto mt-2 mb-8">
-			<MainPosts posts={posts}></MainPosts>
-		</main>
-		<nav class="flex w-11/12 md:w-3/5 mx-auto justify-between">
-			<a></a>
-			{allPostLength > 5 ? <a class="block bg-black text-white text-sm px-3 py-2 rounded-2xl" href="/2">Next </a> : <a></a>}
-		</nav>
-		<Footer />
-	</body>
-</html>
+<MainLayout>
+  <Header title={SITE_TITLE} />
+  <main class="w-11/12 md:w-3/5 mx-auto mt-2 mb-6">
+    <MainPosts posts={posts} />
+    <div class="w-full flex">
+      <nav class="ml-auto mr-0">
+        {
+          allPostLength > PAGE_SIZE ? (
+            <a
+              class="block bg-black text-white text-sm px-3 py-2 rounded-2xl"
+              href="/2"
+            >
+              Next{" "}
+            </a>
+          ) : (
+            <a />
+          )
+        }
+      </nav>
+    </div>
+  </main>
+
+  <Footer />
+</MainLayout>

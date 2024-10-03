@@ -1,9 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { SITE_TITLE } from "../../consts";
 import Footer from "../../components/Footer.astro";
+import MainLayout from "../../layouts/mainLayout.astro";
 import MainPosts from "../../components/MainPosts.astro";
 
 // Uses tag as dynamic params
@@ -21,11 +21,8 @@ export async function getStaticPaths() {
   });
 }
 
-// // Get tag name
 let pathName = Astro.url.pathname.split("/");
-let tagName = pathName[pathName.length - 1];
-tagName = decodeURIComponent(tagName);
-console.log(tagName);
+let tagName = pathName[pathName.indexOf("tags") + 1];
 
 //  Get the content containing the Tag
 const posts = await getCollection("blog", ({ data }) => {
@@ -33,26 +30,15 @@ const posts = await getCollection("blog", ({ data }) => {
 });
 ---
 
-<!DOCTYPE html>
-<html lang="en" class="color-scheme">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body class="dark:bg-zinc-800 dark:text-slate-200">
-    <Header title={SITE_TITLE} />
-    <main class="w-11/12 md:w-3/5 mx-auto mt-2 md:max-w-[90ch]">
-      <div class="mb-2 mt-6 md:mt-20">
-        <a href="/">Home</a>&nbsp;»&nbsp;
-        <a href={"/" + "tags"}>Tags</a>
-      </div>
-      <h1 class="font-bold text-4xl dark:text-slate-200 mb-4">{tagName}</h1>
-      <!-- <MainPosts posts={posts} /> -->
-      {
-        posts.map((post) => (
-          <div class="text-xl font-bold pb-2">{post.data.title}</div>
-        ))
-      }
-    </main>
-    <Footer />
-  </body>
-</html>
+<MainLayout>
+  <Header title={SITE_TITLE} />
+  <main class="w-11/12 md:w-3/5 mx-auto mt-2 md:max-w-[90ch]">
+    <div class="mb-2 mt-6 md:mt-20">
+      <a href="/">Home</a>&nbsp;»&nbsp;
+      <a href={"/" + "tags"}>Tags</a>
+    </div>
+    <h1 class="font-bold text-4xl dark:text-slate-200 mb-4">{tagName}</h1>
+    <MainPosts posts={posts} />
+  </main>
+  <Footer />
+</MainLayout>

@@ -1,38 +1,36 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
+import MainLayout from "../layouts/mainLayout.astro";
 
-let posts = (await getCollection('blog')).sort(
-	(b, a) => a.data.date.valueOf() - b.data.date.valueOf()
+let posts = (await getCollection("blog")).sort(
+  (b, a) => a.data.date.valueOf() - b.data.date.valueOf()
 );
 ---
 
-<!DOCTYPE html>
-<html lang="en" class="color-scheme">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body class="dark:bg-zinc-800 dark:text-slate-200">
-    <Header title={SITE_TITLE} />
-    <main class="w-11/12 md:w-3/5 mx-auto mt-2 md:max-w-[90ch]">
-      <h1 class="mt-6 md:mt-20 font-bold text-4xl  dark:text-slate-200 mb-4 ">Archive</h1>
-      <ul>
-        {
-            posts.map((post) => (
-              <a href={`/blog/${post.slug}/`}>
-                <li class="relative cursor-pointer mb-2">
-                  <spna><FormattedDate date={post.data.date} /></spna>
-                  <span class="absolute left-28">{post.data.title}</span>
-                </li>
-              </a>
-            ))
-        }
-      </ul>
-    </main>
-    <Footer />
-  </body>
-</html>
+<MainLayout>
+  <Header title={SITE_TITLE} />
+  <main class="w-11/12 md:w-3/5 mx-auto mt-2 md:max-w-[90ch]">
+    <h1 class="mt-6 md:mt-20 font-bold text-4xl dark:text-slate-200 mb-4">
+      Archive
+    </h1>
+    <ul>
+      {
+        posts.map((post) => (
+          <a href={`/blog/${post.slug}/`}>
+            <li class="relative cursor-pointer mb-2">
+              <spna>
+                <FormattedDate date={post.data.date} />
+              </spna>
+              <span class="absolute left-28">{post.data.title}</span>
+            </li>
+          </a>
+        ))
+      }
+    </ul>
+  </main>
+  <Footer />
+</MainLayout>
