@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 }
 
 let pathName = Astro.url.pathname.split("/");
-let tagName = pathName[pathName.indexOf("tags") + 1];
+let tagName = decodeURI(pathName[pathName.indexOf("tags") + 1]);
 
 //  Get the content containing the Tag
 const posts = await getCollection("blog", ({ data }) => {
