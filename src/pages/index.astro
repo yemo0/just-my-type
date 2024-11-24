@@ -15,8 +15,7 @@ if (posts.length >= PAGE_SIZE) {
 }
 ---
 
-<MainLayout>
-  <Header title={SITE_TITLE} />
+<MainLayout pageTitle="Index">
   <main class="w-11/12 md:w-3/5 mx-auto mt-2 mb-6">
     <MainPosts posts={posts} />
     <div class="w-full flex">

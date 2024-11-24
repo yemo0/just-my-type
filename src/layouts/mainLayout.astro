@@ -1,18 +1,22 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import SeoHead from "../components/SeoHead.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+const { title, pageTitle } = Astro.props;
+
 ---
 
 <!DOCTYPE html>
 <html lang="en" class="color-scheme overflow-y-scroll">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <SeoHead title={pageTitle} description={SITE_DESCRIPTION} />
     <meta charset="UTF-8" /><meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
-    /><title>Document</title>
+    />
   </head>
   <body class="flex-col dark:bg-neutral-1000 dark:text-slate-200">
+    <Header title={title || "Home"} />
     <slot />
   </body>
 </html>

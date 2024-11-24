@@ -1,12 +1,14 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE } from "../consts";
+import { GITHUB_PROFILE_URL, DOCS_URL }  from "../consts";
+
+const { title } = Astro.props
 ---
 
 <header class="w-11/12 md:w-3/5 mx-auto">
   <div class="flex h-16 items-center justify-between mb-5">
     <div class="text-2xl font-bold">
-      <a href="/">{SITE_TITLE}</a>
+      <a href="/">{title}</a>
       <button accesskey="t" title="(Alt + T)">
         <svg
           id="moon"
@@ -53,8 +55,8 @@ import { SITE_TITLE } from "../consts";
     <nav class="hidden md:block">
       <HeaderLink href="/archives">Archive</HeaderLink>
       <HeaderLink href="/tags">Tags</HeaderLink>
-      <HeaderLink href="/Docs" target="_blank">Docs</HeaderLink>
-      <HeaderLink href="/GitHub" target="_blank">GitHub</HeaderLink>
+      <HeaderLink href={DOCS_URL} target="_blank">Docs</HeaderLink>
+      <HeaderLink href={GITHUB_PROFILE_URL} target="_blank">GitHub</HeaderLink>
     </nav>
 
     <!-- Mobile menu -->

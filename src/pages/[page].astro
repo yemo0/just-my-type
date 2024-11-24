@@ -17,8 +17,7 @@ interface Page {
 }
 ---
 
-<MainLayout>
-  <Header title={SITE_TITLE} />
+<MainLayout pageTitle="page">
   <main class="w-11/12 md:w-3/5 mx-auto mt-2 mb-8">
     <MainPosts posts={page.data} />
   </main>

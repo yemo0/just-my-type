@@ -30,8 +30,7 @@ const posts = await getCollection("blog", ({ data }) => {
 });
 ---
 
-<MainLayout>
-  <Header title={SITE_TITLE} />
+<MainLayout pageTitle={tagName}>
   <main class="w-11/12 md:w-3/5 mx-auto mt-2 md:max-w-[90ch]">
     <div class="mb-2 mt-6 md:mt-20">
       <a href="/">Home</a>&nbsp;»&nbsp;
